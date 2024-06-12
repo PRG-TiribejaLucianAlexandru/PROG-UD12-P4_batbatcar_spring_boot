@@ -106,3 +106,21 @@ table.viajes tr:nth-child(2n) {
     padding: 2px;
     font-size: 12px;
 }
+
+.button-add {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    font-size: 1.25em;
+    color: #fff;
+    background-color: #5C6BC0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.button-add:hover {
+    background-color: #3F51B5;
+}

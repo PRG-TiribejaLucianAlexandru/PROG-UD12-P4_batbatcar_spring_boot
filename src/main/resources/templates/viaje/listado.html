@@ -1,5 +1,3 @@
-<!-- Vista principal: Listado de viajes -->
-
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
@@ -15,6 +13,10 @@
 </div>
 <div class="section">
     <h3><strong>Listado de Viajes</strong></h3>
+<a href="/viajes/add" class="button-add">Añadir Viaje</a>
+</div>
+<div th:if="${mensaje}" class="alert alert-success" role="alert">
+    <p th:text="${mensaje}"></p>
 </div>
 <table class="viajes">
     <tr>
@@ -24,6 +26,7 @@
         <th>Fecha y hora de salida</th>
         <th>Estado</th>
         <th>Reservas</th>
+        <th>Acciones</th>
     </tr>
     <tr th:each="viaje: ${viajes}">
         <td th:text="${viaje.getCodViaje()}"></td>
@@ -33,7 +36,12 @@
         <td th:classappend="${(viaje.estaDisponible()) ? 'abierto':'cerrado'}" th:text="${viaje.getEstado()}"></td>
         <td>
             <span th:if="${viaje.seHanRealizadoReservas}">Sí</span>
-			<span th:unless="${viaje.seHanRealizadoReservas}">No</span>
+            <span th:unless="${viaje.seHanRealizadoReservas}">No</span>
+        </td>
+        <td>
+            <a th:if="${viaje.estaDisponible()}" th:href="@{viaje/reserva/add(codViaje=${viaje.getCodViaje()})}" class="btn btn-primary">Reservar</a>
+            <a th:href="@{/viaje(codViaje=${viaje.getCodViaje()})}" class="btn btn-info">Ver detalle</a>
+            <a th:href="@{/viaje/reservas(codViaje=${viaje.getCodViaje()})}" class="btn btn-success">Ver reservas</a>
         </td>
     </tr>
 </table>

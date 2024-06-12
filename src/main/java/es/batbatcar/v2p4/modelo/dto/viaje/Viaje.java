@@ -44,10 +44,10 @@ public class Viaje implements Comparable<Viaje> {
         this.codViaje = codViaje;
         set(propietario, ruta, fechaSalida, duracion, precio, plazasOfertadas, estadoViaje);
     }
-    
+
     public void set(String propietario, String ruta, LocalDateTime fechaSalida, long duracion,
-            float precio, int plazasOfertadas, EstadoViaje estadoViaje) {
-		this.propietario = propietario;
+                    float precio, int plazasOfertadas, EstadoViaje estadoViaje) {
+        this.propietario = propietario;
         this.ruta = ruta;
         this.fechaSalida = fechaSalida;
         this.duracion = duracion;
@@ -55,13 +55,13 @@ public class Viaje implements Comparable<Viaje> {
         this.estadoViaje = estadoViaje;
         this.seHanRealizadoReservas = false;
         setPlazas(plazasOfertadas);
-	}
-    
-    public boolean isSeHanRealizadoReservas() {
-		return seHanRealizadoReservas;
-	}
+    }
 
-	public void setSeHanRealizadoReservas(boolean seHanRealizadoReservas) {
+    public boolean isSeHanRealizadoReservas() {
+        return seHanRealizadoReservas;
+    }
+
+    public void setSeHanRealizadoReservas(boolean seHanRealizadoReservas) {
         this.seHanRealizadoReservas = seHanRealizadoReservas;
     }
 
@@ -79,7 +79,7 @@ public class Viaje implements Comparable<Viaje> {
         }
         this.plazasOfertadas = plazas;
     }
-    
+
     public boolean isCerrado() {
         return !(this.estadoViaje == EstadoViaje.ABIERTO && !haSalido());
     }
@@ -103,6 +103,14 @@ public class Viaje implements Comparable<Viaje> {
         return codViaje == viaje.codViaje;
     }
 
+    public int getHoraSalida() {
+        return fechaSalida.getHour();
+    }
+
+    public int getMinutoSalida() {
+        return fechaSalida.getMinute();
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(codViaje);
@@ -119,6 +127,16 @@ public class Viaje implements Comparable<Viaje> {
     public String getFechaSalidaFormatted() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return dateTimeFormatter.format(fechaSalida);
+    }
+
+    public String getDiaSalidaFormatted() {
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return dateFormatter.format(fechaSalida);
+    }
+
+    public String getHoraSalidaFormatted() {
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        return timeFormatter.format(fechaSalida);
     }
 
     public float getPrecio() {

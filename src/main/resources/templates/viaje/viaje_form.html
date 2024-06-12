@@ -1,1 +1,41 @@
-<!-- Vista del formulario de inserción de un viaje -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Añadir Viaje</title>
+    <link rel="stylesheet" href="/css/viaje_form.css">
+</head>
+<body>
+<h1>Añadir Viaje</h1>
+
+<form action="#" th:action="@{/viajes/addAction}" method="post">
+    <label for="ruta">Ruta:</label><br>
+    <input type="text" id="ruta" name="ruta" required pattern="[A-Za-z]+(-[A-Za-z]+)+"><br>
+
+    <label for="plazas">Plazas ofertadas:</label><br>
+    <input type="number" id="plazas" name="plazas" min="1" max="6" required><br>
+
+    <label for="propietario">Propietario:</label><br>
+    <input type="text" id="propietario" name="propietario" required pattern="[A-Z][a-z]* [A-Z][a-z]*"><br>
+
+    <label for="precio">Precio:</label><br>
+    <input type="number" id="precio" name="precio" step="0.01" min="0" required><br>
+
+    <label for="duracion">Duración:</label><br>
+    <input type="number" id="duracion" name="duracion" min="0" required><br>
+
+    <label for="diaSalida">Día de salida:</label><br>
+    <input type="date" id="diaSalida" name="diaSalida" required><br>
+
+    <label for="horaSalida">Hora de salida:</label><br>
+    <input type="time" id="horaSalida" name="horaSalida" required><br>
+
+    <input type="submit" value="Añadir">
+</form>
+
+<div th:if="${error}" class="alert alert-danger" role="alert">
+    <p th:text="${error}"></p>
+</div>
+
+<a href="/viajes"><button type="button">Volver al listado</button></a>
+</body>
+</html>

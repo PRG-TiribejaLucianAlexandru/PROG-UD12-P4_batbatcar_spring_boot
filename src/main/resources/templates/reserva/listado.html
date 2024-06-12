@@ -1,1 +1,32 @@
-<!-- Vista para el listado de reservas de un viaje -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Listado de Reservas</title>
+    <link rel="stylesheet" href="/css/reserva_listado.css">
+</head>
+<body>
+<h1 th:text="'Listado de reservas para el viaje ' + ${codViaje}"></h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Código de Reserva</th>
+                <th>Usuario</th>
+                <th>Plazas Reservadas</th>
+                <th>Fecha y Hora de Reserva</th>
+
+            </tr>
+        </thead>
+        <tbody th:each="reserva : ${reservas}">
+            <tr>
+                <td th:text="${reserva.codigoReserva}"></td>
+                <td th:text="${reserva.usuario}"></td>
+                <td th:text="${reserva.plazasSolicitadas}"></td>
+                <td th:text="${reserva.getFechaRealizacionFormatted()}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button onclick="location.href='/viajes'">Volver al listado de viajes</button>
+</body>
+</html>
