@@ -20,6 +20,6 @@
     <input type="submit" value="Añadir">
 </form>
 
-<button onclick="location.href='/viajes'">Volver al listado de viajes</button>
+<a class="volver" th:href="@{/viaje/(codViaje=${codViaje})}">Volver al viaje</a>
 </body>
 </html>

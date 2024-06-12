@@ -1,35 +1,92 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<body xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Detalle del Viaje</title>
+    <style>
+        .column {
+            float: left;
+            width: 50%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+    </style>
     <link rel="stylesheet" href="/css/viaje_form.css">
 </head>
-<body>
-<h1>Detalle del Viaje</h1>
+<div>
+    <h1>Detalle del Viaje</h1>
+    <div class="alert-success" th:if="${message}" th:text="${message}"></div>
 
-<form>
-    <label for="ruta">Ruta:</label><br>
-    <input type="text" id="ruta" name="ruta" th:value="${viaje.ruta}" readonly><br>
+    <div class="row">
+        <div class="column">
+            <form>
+                <label for="ruta">Ruta:</label><br>
+                <input type="text" id="ruta" name="ruta" th:value="${viaje.ruta}" readonly><br>
 
-    <label for="plazas">Plazas ofertadas:</label><br>
-    <input type="number" id="plazas" name="plazas" th:value="${viaje.plazasOfertadas}" readonly><br>
+                <label for="plazas">Plazas ofertadas:</label><br>
+                <input type="number" id="plazas" name="plazas" th:value="${viaje.plazasOfertadas}" readonly><br>
 
-    <label for="propietario">Propietario:</label><br>
-    <input type="text" id="propietario" name="propietario" th:value="${viaje.propietario}" readonly><br>
+                <label for="propietario">Propietario:</label><br>
+                <input type="text" id="propietario" name="propietario" th:value="${viaje.propietario}" readonly><br>
 
-    <label for="precio">Precio:</label><br>
-    <input type="number" id="precio" name="precio" th:value="${viaje.precio}" readonly><br>
+                <label for="precio">Precio:</label><br>
+                <input type="number" id="precio" name="precio" th:value="${viaje.precio}" readonly><br>
 
-    <label for="duracion">Duración:</label><br>
-    <input type="number" id="duracion" name="duracion" th:value="${viaje.duracion}" readonly><br>
+                <label for="duracion">Duración:</label><br>
+                <input type="number" id="duracion" name="duracion" th:value="${viaje.duracion}" readonly><br>
 
-    <label for="diaSalida">Día de salida:</label><br>
-    <input type="date" id="diaSalida" name="diaSalida" th:value="${viaje.diaSalidaFormatted}" readonly><br>
+                <label for="diaSalida">Día de salida:</label><br>
+                <input type="date" id="diaSalida" name="diaSalida" th:value="${viaje.diaSalidaFormatted}" readonly><br>
 
-    <label for="horaSalida">Hora de salida:</label><br>
-    <input type="time" id="horaSalida" name="horaSalida" th:value="${viaje.horaSalidaFormatted}" readonly><br>
-</form>
+                <label for="horaSalida">Hora de salida:</label><br>
+                <input type="time" id="horaSalida" name="horaSalida" th:value="${viaje.horaSalidaFormatted}"
+                       readonly><br>
 
-<a href="/viajes"><button type="button">Volver al listado</button></a>
+
+            </form>
+        </div>
+
+        <div class="column">
+            <h2>Reservas</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Usuario</th>
+                    <th>Plazas Reservadas</th>
+                    <th>Fecha de Reserva</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="reserva : ${reservas}">
+                    <td th:text="${reserva.usuario}"></td>
+                    <td th:text="${reserva.plazasSolicitadas}"></td>
+                    <td th:text="${reserva.fechaRealizacionFormatted}"></td>
+                    <td>
+                        <a th:href="@{/reserva/detalles(codReserva=${reserva.codigoReserva}, origen='viaje')}" class="btn btn-info">Ver Detalles</a> |
+                        <a th:href="@{/reserva/cancelar/(codReserva=${reserva.codigoReserva})}">Cancelar Reserva</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <a href="/viajes">
+                <button type="button">Volver al listado</button>
+            </a>
+
+            <a th:href="@{/viaje/cancelar/(codViaje=${viaje.codViaje})}">
+                <button type="button" th:if="${esViajeAbierto}">Cancelar el viaje</button>
+            </a>
+            <a th:href="@{viaje/reserva/add(codViaje=${viaje.codViaje})}">
+                <button type="button" th:if="${sePuedeReservar}">Realizar una
+                    reserva
+                </button>
+            </a>
+        </div>
 </body>
 </html>

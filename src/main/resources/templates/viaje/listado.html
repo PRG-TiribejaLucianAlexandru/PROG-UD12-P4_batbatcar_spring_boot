@@ -13,7 +13,12 @@
 </div>
 <div class="section">
     <h3><strong>Listado de Viajes</strong></h3>
-<a href="/viajes/add" class="button-add">Añadir Viaje</a>
+    <a href="/viajes/add" class="button-add">Añadir Viaje</a>
+
+    <form action="#" th:action="@{/viajes}" method="get">
+        <input type="text" name="ciudad" placeholder="Buscar por ciudad">
+        <input type="submit" value="Buscar">
+    </form>
 </div>
 <div th:if="${mensaje}" class="alert alert-success" role="alert">
     <p th:text="${mensaje}"></p>
@@ -39,9 +44,9 @@
             <span th:unless="${viaje.seHanRealizadoReservas}">No</span>
         </td>
         <td>
-            <a th:if="${viaje.estaDisponible()}" th:href="@{viaje/reserva/add(codViaje=${viaje.getCodViaje()})}" class="btn btn-primary">Reservar</a>
             <a th:href="@{/viaje(codViaje=${viaje.getCodViaje()})}" class="btn btn-info">Ver detalle</a>
-            <a th:href="@{/viaje/reservas(codViaje=${viaje.getCodViaje()})}" class="btn btn-success">Ver reservas</a>
+            <a th:href="@{/viaje/reservas(codViaje=${viaje.getCodViaje()})}" class="btn btn-info">Ver reservas</a>
+            <a th:if="${viaje.estaDisponible()}" th:href="@{/viaje/cancelar(codViaje=${viaje.getCodViaje()})}" class="btn btn-danger">Cancelar</a>
         </td>
     </tr>
 </table>

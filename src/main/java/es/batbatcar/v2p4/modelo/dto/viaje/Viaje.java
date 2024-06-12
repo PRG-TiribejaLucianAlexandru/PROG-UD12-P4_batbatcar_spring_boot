@@ -1,5 +1,6 @@
 package es.batbatcar.v2p4.modelo.dto.viaje;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import es.batbatcar.v2p4.exceptions.*;
 
 import java.time.LocalDateTime;
@@ -25,6 +26,41 @@ public class Viaje implements Comparable<Viaje> {
     protected EstadoViaje estadoViaje;
 
     protected boolean seHanRealizadoReservas;
+
+    public void setCodViaje(int codViaje) {
+        this.codViaje = codViaje;
+    }
+
+    public void setPropietario(String propietario) {
+        this.propietario = propietario;
+    }
+
+    public void setRuta(String ruta) {
+        this.ruta = ruta;
+    }
+
+    public void setFechaSalida(LocalDateTime fechaSalida) {
+        this.fechaSalida = fechaSalida;
+    }
+
+    public void setDuracion(long duracion) {
+        this.duracion = duracion;
+    }
+
+    public void setPrecio(float precio) {
+        this.precio = precio;
+    }
+
+    public void setPlazasOfertadas(int plazasOfertadas) {
+        this.plazasOfertadas = plazasOfertadas;
+    }
+
+    public void setEstadoViaje(EstadoViaje estadoViaje) {
+        this.estadoViaje = estadoViaje;
+    }
+
+    public Viaje() {
+    }
 
     public Viaje(int codViaje) {
         this(codViaje, "", "", LocalDateTime.now(), 0, 5f, 4);
@@ -188,4 +224,19 @@ public class Viaje implements Comparable<Viaje> {
     public void cerrarViaje() {
         estadoViaje = EstadoViaje.CERRADO;
     }
+
+    public int getPlazas() {
+        return this.plazasOfertadas;
+    }
+
+    public EstadoViaje getEstadoViaje() {
+        return estadoViaje;
+    }
+
+    public String getUsuario() {
+        return this.propietario;
+    }
 }
+
+
+

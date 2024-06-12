@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalles de la Reserva</title>
+    <link rel="stylesheet" href="/css/reserva_listado.css">
+</head>
+<body>
+<h1>Detalles de la Reserva</h1>
+
+<table>
+    <tr>
+        <td>Código de Reserva:</td>
+        <td th:text="${reserva.codigoReserva}"></td>
+    </tr>
+    <tr>
+        <td>Usuario:</td>
+        <td th:text="${reserva.usuario}"></td>
+    </tr>
+    <tr>
+        <td>Plazas Reservadas:</td>
+        <td th:text="${reserva.plazasSolicitadas}"></td>
+    </tr>
+    <tr>
+        <td>Fecha de Reserva:</td>
+        <td th:text="${reserva.fechaRealizacionFormatted}"></td>
+    </tr>
+
+</table>
+
+<h1>Detalles del Viaje</h1>
+
+<table>
+    <tr>
+        <td>Código de Viaje:</td>
+        <td th:text="${viaje.codViaje}"></td>
+    </tr>
+    <tr>
+        <td>Ruta:</td>
+        <td th:text="${viaje.ruta}"></td>
+    </tr>
+    <tr>
+        <td>Propietario:</td>
+        <td th:text="${viaje.propietario}"></td>
+    </tr>
+    <tr>
+        <td>Precio:</td>
+        <td th:text="${viaje.precio}"></td>
+    </tr>
+    <tr>
+        <td>Fecha Salida:</td>
+        <td th:text="${viaje.fechaSalidaFormatted}"></td>
+    </tr>
+</table>
+
+
+<a th:if="${origen == 'listado'}" class="volver" th:href="@{/viaje/reservas(codViaje=${reserva.codigoViaje})}">Volver al listado</a>
+<a th:if="${origen == 'viaje'}" class="volver" th:href="@{/viaje/(codViaje=${reserva.codigoViaje})}">Volver al viaje</a>
+</body>
+</html>

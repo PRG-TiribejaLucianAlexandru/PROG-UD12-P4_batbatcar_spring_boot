@@ -50,3 +50,17 @@ button {
 button:hover {
     background-color: #E91E63;
 }
+
+.volver {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    background-color: #FF4081;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+}

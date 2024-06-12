@@ -10,6 +10,22 @@ public class Reserva {
 
     private String codigoReserva;
 
+    public void setCodigoReserva(String codigoReserva) {
+        this.codigoReserva = codigoReserva;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public void setFechaRealizacion(LocalDateTime fechaRealizacion) {
+        this.fechaRealizacion = fechaRealizacion;
+    }
+
+    public void setViaje(Viaje viaje) {
+        this.viaje = viaje;
+    }
+
     private String usuario;
 
     private int plazasSolicitadas;
@@ -18,6 +34,8 @@ public class Reserva {
     
     private Viaje viaje;
 
+
+    public Reserva() {}
     public Reserva(String codigoReserva) {
         this(codigoReserva, "xxxx", 0, LocalDateTime.now(), null);
     }
@@ -91,4 +109,6 @@ public class Reserva {
     public int getCodigoViaje() {
         return Integer.parseInt(codigoReserva.split("-")[0]);
     }
-}
+
+    }
+

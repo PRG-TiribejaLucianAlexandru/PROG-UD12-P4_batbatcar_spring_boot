@@ -14,7 +14,7 @@
                 <th>Usuario</th>
                 <th>Plazas Reservadas</th>
                 <th>Fecha y Hora de Reserva</th>
-
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody th:each="reserva : ${reservas}">
@@ -23,6 +23,9 @@
                 <td th:text="${reserva.usuario}"></td>
                 <td th:text="${reserva.plazasSolicitadas}"></td>
                 <td th:text="${reserva.getFechaRealizacionFormatted()}"></td>
+                <td>
+                    <a th:href="@{/reserva/detalles(codReserva=${reserva.codigoReserva}, origen='listado')}" class="btn btn-info">Ver Detalles</a>
+                </td>
             </tr>
         </tbody>
     </table>
